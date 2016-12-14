@@ -6,7 +6,7 @@ class App extends React.Component {
 	render () {
 		return (
 		  <div>
-			<p> Hello Vols</p>
+			<h1>University Of Tennessee Football Roster</h1>
 			<GetAllVols />
 		  </div>
 		);

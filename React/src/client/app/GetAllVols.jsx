@@ -5,8 +5,7 @@ class GetAllVols extends React.Component {
 
   constructor(props) {
     super(props);
-	this.state = {Vols: "Waiting..."};
-	this.getData = this.getData.bind(this);
+	this.state = {Vols: []};
 	this.getData(this);
   }
 
@@ -14,14 +13,22 @@ class GetAllVols extends React.Component {
 	  
     return (
       <div>
-		<h1>{this.state.Vols}</h1>
+		<table>
+			<thead><tr><th>First Name</th><th>Last Name</th><th>Position</th></tr></thead>
+			<tbody>
+				{this.state.Vols.map(function(object, i){
+					return <tr key={object.volId}>
+								<td>{object.firstName}</td>
+								<td>{object.lastName}</td>
+								<td>{object.position}</td>
+							</tr>
+				})}
+			</tbody>
+		</table>
       </div>
     );
   }
   
-  updateState(state){
-	  this.setState(state);
-  }
   
 	getData(obj){	  
      
@@ -35,14 +42,12 @@ class GetAllVols extends React.Component {
 	  .then(function(response) {
 		    return response.json()
 		  }).then(function(json) {
-			obj.setState({Vols: json[0].firstName});
+			obj.setState({Vols: json});
 		  }).catch(function(ex) {
 			console.log('parsing failed', ex)
 		  })
   }
 
 }
-
-
 
 export default GetAllVols;
